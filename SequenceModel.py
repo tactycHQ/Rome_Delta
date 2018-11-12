@@ -27,9 +27,10 @@ class SequenceModel():
     '''
     def build_model(self,x_train,y_train,batch_size=72,epochs=20):
         timesteps, dim = x_train.shape[1],x_train.shape[2]
-        self.model.add(layers.GRU(128,dropout=0.0,input_shape=(timesteps,dim),return_sequences=True))
-        self.model.add(layers.GRU(128,dropout=0.0,return_sequences=True))
+        self.model.add(layers.GRU(128,dropout=0.2,input_shape=(timesteps,dim),return_sequences=True))
+        self.model.add(layers.GRU(128,dropout=0.2,return_sequences=True))
         # self.model.add(layers.GRU(32, return_sequences=True, input_shape=(timesteps, dim)))
+        self.model.add(layers.BatchNormalization())
         self.model.add((layers.Dense(1)))
         print(self.model.summary())
         self.model.compile(optimizer='adam',loss='mae')
@@ -49,7 +50,7 @@ class SequenceModel():
     def modelLoad (self,model_filename,hist_filename):
         self.model=load_model(model_filename)
         with open(hist_filename,'r') as f:
-            self.history=json.load(f)
+            self.history_dict=json.load(f)
 
 
 

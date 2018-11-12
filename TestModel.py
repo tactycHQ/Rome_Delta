@@ -55,7 +55,7 @@ def main():
 
     y_actuals = d.prices[start_index+1:end_index]
 
-    plotTestPerformance(y_pred_price,y_actuals,y_dates,model.history,d.targets_std,window_size=window_size)
+    plotTestPerformance(y_pred_price,y_actuals,y_dates,model.history_dict,d.targets_std,window_size=window_size)
 
 
 def plotPerformance(model,history,targets_std):

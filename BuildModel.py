@@ -51,7 +51,7 @@ def main():
     model.modelSave("Data/"+ticker+'.h5',"Data/"+ticker+'_history.json')
     # model.modelLoad("Data/" + ticker + '.h5', "Data/" + ticker + '_history.json')
     #Plot model
-    plotPerformance(model,model.history, d.targets_std)
+    plotPerformance(model,model.history_dict, d.targets_std)
 
 
 def createInputs(features, targets, dates, window_size, window_shift,start_index,end_index):

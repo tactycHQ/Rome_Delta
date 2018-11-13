@@ -38,25 +38,26 @@ def main():
 
     model=SequenceModel()
     model.modelLoad("Data/"+ticker+'.h5',"Data/"+ticker+'_history.json')
-
-    start_price = np.array(d.prices[start_index:end_index]).reshape(-1,1)
-
     y_pred=model.predict_model(x_test)
+    y_pred_price,y_actuals,y_dates=createPlotData(start_index,end_index,y_pred,d)
+    plotTestPerformance(y_pred_price,y_actuals,y_dates,model.history_dict,d.targets_std,window_size=window_size)
+
+def createPlotData(start_index, end_index, y_pred,d):
+    start_price = np.array(d.prices[start_index:end_index]).reshape(-1,1)
 
     y_pred = d.denormalize(y_pred, d.targets_mean, d.targets_std)
     y_pred = y_pred + 1
-    y_pred_price=[]
-    for i in range (0,len(y_pred)):
-        cume_change = np.cumprod(y_pred[i,:,:]).reshape(-1,1)
-        y_pred_price.append(cume_change*start_price[i])
-    y_pred_price=np.array(y_pred_price)
+    y_pred_price = []
+    for i in range(0, len(y_pred)):
+        cume_change = np.cumprod(y_pred[i, :, :]).reshape(-1, 1)
+        y_pred_price.append(cume_change * start_price[i])
+    y_pred_price = np.array(y_pred_price)
 
-    y_dates = d.dates[start_index+1:end_index]
+    y_dates = d.dates[start_index + 1:end_index]
 
-    y_actuals = d.prices[start_index+1:end_index]
+    y_actuals = d.prices[start_index + 1:end_index]
 
-    plotTestPerformance(y_pred_price,y_actuals,y_dates,model.history_dict,d.targets_std,window_size=window_size)
-
+    return y_pred_price,y_actuals,y_dates
 
 def plotPerformance(model,history,targets_std):
     loss = history['loss']

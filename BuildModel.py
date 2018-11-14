@@ -86,6 +86,11 @@ def createInputs(features, targets, dates, window_size, window_shift,start_index
     print("y_dates_train Shape is ", dates_train.shape)
     return x_train, y_train, dates_train
 
+# def checkModel(data,y_pred_price,y_actuals,y_dates, start_index):
+#     print("Date of 1st y_actuals", y_dates[0])
+#     print("Value of 1st y_actuals", y_actuals[0])
+#     print("Value of 1st prices", data.prices[start_index+1])
+
 def plotPerformance(model,history,targets_std):
     loss = history['loss']
     val_loss = history['val_loss']

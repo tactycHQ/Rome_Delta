@@ -16,7 +16,7 @@ from BuildModel import createInputs
 #TESTEND is last date of prediction
 
 _TESTSTART='11/10/2015'
-_TESTEND='11/30/2017'
+_TESTEND='2/8/2016'
 
 def main():
     ticker=_TICKER
@@ -35,12 +35,22 @@ def main():
                                            start_index,
                                            end_index)
 
+    print("Mean: ", d.targets_mean)
+    print("STD: ", d.targets_std)
+    print("x_test shape: ", x_test.shape)
+    print("y_test shape: ", y_test.shape)
+    print("y_test 1st value: ", d.denormalize(y_test[0,0,0],d.targets_mean,d.targets_std))
+    print("dates_test shape: ", dates_test.shape)
 
     model=SequenceModel()
     model.modelLoad("Data/"+ticker+'.h5',"Data/"+ticker+'_history.json')
     y_pred=model.predict_model(x_test)
     y_pred_price,y_actuals,y_dates=createPlotData(start_index,end_index,y_pred,d)
-    plotTestPerformance(y_pred_price,y_actuals,y_dates,model.history_dict,d.targets_std,window_size=window_size)
+
+    checkModel(d,x_test, y_actuals, y_dates, start_index)
+
+    # plotTestPerformance(y_pred_price,y_actuals,y_dates,model.history_dict,d.targets_std,window_size=window_size)
+
 
 def createPlotData(start_index, end_index, y_pred,d):
     start_price = np.array(d.prices[start_index:end_index]).reshape(-1,1)
@@ -55,6 +65,13 @@ def createPlotData(start_index, end_index, y_pred,d):
     y_actuals = d.prices[start_index + 1:end_index]
 
     return y_pred_price,y_actuals,y_dates
+
+def checkModel(data,x_test,y_actuals,y_dates, start_index):
+    print("Date of 1st y_actuals", y_dates[0])
+    print("Value of 1st y_actuals", y_actuals[0])
+    print("Value of 1st x_test", data.denormalize(x_test[0,0,:],data.targets_mean,data.targets_std))
+    print("Value of 1st prices", data.prices[start_index+1])
+
 
 def plotPerformance(model,history,targets_std):
     loss = history['loss']

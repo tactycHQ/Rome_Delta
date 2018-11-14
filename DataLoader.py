@@ -51,7 +51,6 @@ class DataLoader():
         self.volume_diff = self.volume_diff.reshape(-1, 1)
 
         self.dates = self.stock_data['date'].values.reshape(-1, 1)
-        self.dates = self.dates[1:]
         self.features=np.concatenate((self.targets,self.volume_diff),axis=1)
 
         self.features, self.features_mean, self.featured_std = self.normalize(self.features)

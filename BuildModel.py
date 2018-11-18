@@ -16,7 +16,7 @@ import matplotlib.dates as mdates
 #Global Variables
 _WINDOWSIZE=60
 _WINDOW_SHIFT=1
-_TICKER='SINE'
+_TICKER='AAPL'
 _START = '3/9/2009'
 _END = '11/10/2015'
 _EPOCHS=20

@@ -41,7 +41,7 @@ def main():
 
     y_pred_price=PricefromDelta(y_pred_delta,start_price)
 
-    plotPredictions(y_pred_price)
+    plotPredictions(y_pred_price,d)
 
 
 def PricefromDelta(y_pred_delta,start_price):
@@ -51,9 +51,13 @@ def PricefromDelta(y_pred_delta,start_price):
 
     return y_pred_prices
 
-def plotPredictions(y_pred_price):
+def plotPredictions(y_pred_price,d):
+    hist_width=2*len(y_pred_price)
+
+    y_pred_price=np.lib.pad(y_pred_price,(hist_width,0),'constant',constant_values=np.NAN)
     fig, axs = plt.subplots()
-    axs.plot(y_pred_price, label='Predicted Prices')
+    axs.plot(y_pred_price)
+    axs.plot(d.prices[-hist_width:,:],label='Historical Prices')
     axs.set_title('Predictions')
     axs.legend()
     plt.show()

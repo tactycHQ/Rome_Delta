@@ -69,6 +69,7 @@ def createPlotData(start_index, end_index, y_pred,d):
 def checkModel(data,x_test,y_actuals,y_dates, start_index):
     print("Date of 1st y_actuals", y_dates[0])
     print("Value of 1st y_actuals", y_actuals[0])
+    print("Value of 1st y_test", y_actuals[0])
     print("Value of 1st x_test", data.denormalize(x_test[0,0,:],data.targets_mean,data.targets_std))
     print("Value of 1st prices", data.prices[start_index+1])
 

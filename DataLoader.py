@@ -43,7 +43,7 @@ class DataLoader():
 
         self.prices = self.stock_data['close'].values.reshape(-1, 1)
         for i in range(1,len(self.prices)):
-            self.targets.append((self.prices[i]-self.prices[i-1])/self.prices[i])
+            self.targets.append((self.prices[i]-self.prices[i-1])/self.prices[i-1])
         self.targets=np.array(self.targets)
 
         self.volume = self.stock_data['volume'].values.reshape(-1, 1)
@@ -51,6 +51,7 @@ class DataLoader():
         self.volume_diff = self.volume_diff.reshape(-1, 1)
 
         self.dates = self.stock_data['date'].values.reshape(-1, 1)
+        self.dates=self.dates[1:,:]
         self.features=np.concatenate((self.targets,self.volume_diff),axis=1)
 
         self.features, self.features_mean, self.featured_std = self.normalize(self.features)

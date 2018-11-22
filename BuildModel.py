@@ -16,8 +16,8 @@ import matplotlib.dates as mdates
 #Global Variables
 _WINDOWSIZE=60
 _WINDOW_SHIFT=1
-_TICKER='AAPL'
-_START = '3/9/2009'
+_TICKER='SPY'
+_START = '1/2/2009'
 _END = '11/10/2015'
 _EPOCHS=20
 _BATCHSIZE=72
@@ -72,7 +72,7 @@ def createInputs(features, targets, dates, window_size, window_shift,start_index
     #and look forward window_size to create output    
     '''
 
-    for i in range(start_index, end_index, window_shift):
+    for i in range(max(start_index,window_size), end_index, window_shift):
         inputs.append(features[i - window_size:i, :])
         outputs.append(targets[i + 1:i + 1 + window_size, :])
         target_dates.append(dates[i + 1:i + 1 + window_size, :])

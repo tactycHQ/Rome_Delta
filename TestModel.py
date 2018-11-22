@@ -89,7 +89,6 @@ def plotPerformance(model,history,targets_std):
     plt.show()
 
 def plotTestPerformance(y_pred,y_actuals,y_dates,history,targets_std,window_size):
-    print(y_dates)
     loss = history['loss']
     val_loss = history['val_loss']
     print('Training loss (Denormalized)', loss[-1] * targets_std)
@@ -106,7 +105,6 @@ def plotTestPerformance(y_pred,y_actuals,y_dates,history,targets_std,window_size
     for i in range (0,len(y_dates)):
         y_dates[i] = dt.datetime.strptime(y_dates[i], '%m/%d/%Y')
 
-    print(y_dates)
     axs[1].plot(y_dates, y_actuals, label='Actual Prices')
 
     for p in range(0, len(y_pred), window_size):

@@ -14,13 +14,13 @@ import matplotlib.dates as mdates
 #windowshift = how much to shift each window. This is the Y in "Model will predict X number of days Y days from now."
 
 #Global Variables
-_WINDOWSIZE=60
+_WINDOWSIZE=90
 _WINDOW_SHIFT=1
 _TICKER='SPY'
 _START = '1/2/2009'
 _END = '11/10/2015'
-_EPOCHS=20
-_BATCHSIZE=72
+_EPOCHS=10
+_BATCHSIZE=32
 
 def main():
 

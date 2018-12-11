@@ -1,4 +1,5 @@
-#Author: Anubhav Srivastava, 2018
+#Author: Anubhav Srivastava
+#Last updated in 2018
 #License: MIT License
 
 from DataLoader import DataLoader

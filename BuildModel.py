@@ -1,4 +1,4 @@
-#Author: Anubhav Srivastava in 2018 -- Master Branch
+#Author: Anubhav Srivastava in 2018 -- Dev Branch
 #Last updated in 2018
 #License: MIT License
 

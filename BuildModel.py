@@ -1,4 +1,4 @@
-#Author: Anubhav Srivastava 2018 December
+#Author: Anubhav Srivastava December 2018 -- DEV
 #Last updated in 2018
 #License: MIT License
 
